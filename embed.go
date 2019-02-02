@@ -2,7 +2,6 @@ package contract
 
 type Embed struct {
 	Url          string         `json:"url"`
-	Type         string         `json:"type"`
 	Title        string         `json:"title"`
 	Description  string         `json:"description"`
 	Timestamp    string         `json:"timestamp"`
