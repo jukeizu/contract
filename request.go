@@ -1,23 +1,23 @@
 package contract
 
 type Request struct {
-	Id        string    `json:"id"`
-	Source    string    `json:"source"`
-	Bot       User      `json:"bot"`
-	Author    User      `json:"author"`
-	ChannelId string    `json:"channelId"`
-	ServerId  string    `json:"serverId"`
-	Servers   []*Server `json:"servers"`
-	Mentions  []*User   `json:"mentions"`
-	Content   string    `json:"content"`
+	Id        string   `json:"id,omitempty"`
+	Source    string   `json:"source,omitempty"`
+	Bot       User     `json:"bot,omitempty"`
+	Author    User     `json:"author,omitempty"`
+	ChannelId string   `json:"channelId,omitempty"`
+	ServerId  string   `json:"serverId,omitempty"`
+	Servers   []Server `json:"servers,omitempty"`
+	Mentions  []User   `json:"mentions,omitempty"`
+	Content   string   `json:"content,omitempty"`
 }
 
 type User struct {
-	Id   string `json:"id"`
-	Name string `json:"name"`
+	Id   string `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
 }
 
 type Server struct {
-	Id   string `json:"id"`
-	Name string `json:"name"`
+	Id   string `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
 }
