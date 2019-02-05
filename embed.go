@@ -10,7 +10,6 @@ type Embed struct {
 	ImageUrl     string         `json:"imageUrl,omitempty"`
 	ThumbnailUrl string         `json:"thumbnailUrl,omitempty"`
 	VideoUrl     string         `json:"videoUrl,omitempty"`
-	Provider     *EmbedProvider `json:"provider,omitempty"`
 	Author       *EmbedAuthor   `json:"author,omitempty"`
 	Fields       []*EmbedField  `json:"fields,omitempty"`
 }
@@ -18,11 +17,6 @@ type Embed struct {
 type EmbedFooter struct {
 	Text    string `json:"text,omitempty"`
 	IconUrl string `json:"iconUrl,omitempty"`
-}
-
-type EmbedProvider struct {
-	Url  string `json:"url,omitempty"`
-	Name string `json:"name,omitempty"`
 }
 
 type EmbedAuthor struct {
