@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func NewHttpHandler(f func(Request) (*Response, error)) func(http.ResponseWriter, *http.Request) {
+func MakeHttpHandler(f func(Request) (*Response, error)) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		request := Request{}
 
