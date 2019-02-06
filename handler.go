@@ -34,17 +34,21 @@ func MakeHttpHandlerFunc(f func(Request) (*Response, error)) http.HandlerFunc {
 }
 
 func writeError(w http.ResponseWriter, r *http.Request, err error) {
+	w.WriteHeader(http.StatusInternalServerError)
+
+	if err == nil {
+		return
+	}
+
 	responseError := Error{
 		Message: err.Error(),
 	}
 
 	jsonResponse, err := json.Marshal(responseError)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusInternalServerError)
 	w.Write(jsonResponse)
 }
