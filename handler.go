@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func MakeHttpHandlerFunc(f func(Request) (*Response, error)) http.HandlerFunc {
+func MakeRequestHttpHandlerFunc(f func(Request) (*Response, error)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		request := Request{}
 
@@ -21,16 +21,40 @@ func MakeHttpHandlerFunc(f func(Request) (*Response, error)) http.HandlerFunc {
 			return
 		}
 
-		jsonResponse, err := json.Marshal(response)
+		writeResponse(w, r, response)
+	}
+}
+
+func MakeJobHttpHandlerFunc(f func(Job) (*Response, error)) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		job := Job{}
+
+		err := json.NewDecoder(r.Body).Decode(&job)
 		if err != nil {
 			writeError(w, r, err)
 			return
 		}
 
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		w.Write(jsonResponse)
+		response, err := f(job)
+		if err != nil {
+			writeError(w, r, err)
+			return
+		}
+
+		writeResponse(w, r, response)
 	}
+}
+
+func writeResponse(w http.ResponseWriter, r *http.Request, response *Response) {
+	jsonResponse, err := json.Marshal(response)
+	if err != nil {
+		writeError(w, r, err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
 }
 
 func writeError(w http.ResponseWriter, r *http.Request, err error) {
