@@ -1,7 +1,7 @@
 package contract
 
 type Reaction struct {
-	ChannelID string
-	MessageID string
-	EmojiID   string
+	ChannelId string `json:"channelId,omitempty"`
+	MessageId string `json:"messageId,omitempty"`
+	EmojiId   string `json:"emojiId,omitempty"`
 }
