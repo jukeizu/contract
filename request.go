@@ -1,15 +1,16 @@
 package contract
 
 type Request struct {
-	Id        string   `json:"id,omitempty"`
-	Source    string   `json:"source,omitempty"`
-	Bot       User     `json:"bot,omitempty"`
-	Author    User     `json:"author,omitempty"`
-	ChannelId string   `json:"channelId,omitempty"`
-	ServerId  string   `json:"serverId,omitempty"`
-	Servers   []Server `json:"servers,omitempty"`
-	Mentions  []User   `json:"mentions,omitempty"`
-	Content   string   `json:"content,omitempty"`
+	Id          string      `json:"id,omitempty"`
+	Source      string      `json:"source,omitempty"`
+	Bot         User        `json:"bot,omitempty"`
+	Author      User        `json:"author,omitempty"`
+	ChannelId   string      `json:"channelId,omitempty"`
+	ServerId    string      `json:"serverId,omitempty"`
+	Servers     []Server    `json:"servers,omitempty"`
+	Mentions    []User      `json:"mentions,omitempty"`
+	Content     string      `json:"content,omitempty"`
+	Application Application `json:"application,omitempty"`
 }
 
 type User struct {
@@ -26,6 +27,14 @@ type Server struct {
 	UserCount       int32  `json:"userCount,omitempty"`
 	IconUrl         string `json:"iconUrl,omitempty"`
 	SystemChannelId string `json:"systemChannelId,omitempty"`
+}
+
+type Application struct {
+	Id          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	Icon        string `json:"icon,omitempty"`
+	Owner       User   `json:"owner,omitempty"`
 }
 
 // Server returns the full server for the ServerId
