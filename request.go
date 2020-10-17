@@ -1,5 +1,11 @@
 package contract
 
+import (
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
+)
+
 type Request struct {
 	Id          string      `json:"id,omitempty" yaml:"id,omitempty"`
 	ContextId   string      `json:"contextId,omitempty" yaml:"contextId,omitempty"`
@@ -48,4 +54,20 @@ func (r Request) Server() Server {
 	}
 
 	return Server{Id: r.ServerId}
+}
+
+// JwtClaims returns jwt claims populated with values from request
+func (r Request) JwtClaims(expiresIn time.Duration) JwtClaims {
+	return JwtClaims{
+		ContextId: r.ContextId,
+		IntentId:  r.IntentId,
+		ChannelId: r.ChannelId,
+		AuthorId:  r.Author.Id,
+		ServerId:  r.ServerId,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(expiresIn).Unix(),
+			IssuedAt:  time.Now().Unix(),
+			NotBefore: time.Now().Unix(),
+		},
+	}
 }

@@ -2,9 +2,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: golang:1.11
+      - image: golang:1.15
     working_directory: /go/src/github.com/jukeizu/contract
     steps:
       - checkout
+      - run: go build
       - run: go vet
       - run: go test -v
