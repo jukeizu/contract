@@ -2,6 +2,8 @@ package contract
 
 type Request struct {
 	Id          string      `json:"id,omitempty" yaml:"id,omitempty"`
+	ContextId   string      `json:"contextId,omitempty" yaml:"contextId,omitempty"`
+	IntentId    string      `json:"intentId,omitempty" yaml:"intentId,omitempty"`
 	Source      string      `json:"source,omitempty" yaml:"source,omitempty"`
 	Bot         User        `json:"bot,omitempty" yaml:"bot,omitempty"`
 	Author      User        `json:"author,omitempty" yaml:"author,omitempty"`
