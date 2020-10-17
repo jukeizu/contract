@@ -56,6 +56,7 @@ func (r Request) Server() Server {
 	return Server{Id: r.ServerId}
 }
 
+// JwtClaims returns jwt claims populated with values from request
 func (r Request) JwtClaims(expiresIn time.Duration) JwtClaims {
 	return JwtClaims{
 		ContextId: r.ContextId,
