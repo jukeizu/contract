@@ -6,5 +6,6 @@ jobs:
     working_directory: /go/src/github.com/jukeizu/contract
     steps:
       - checkout
+      - run: go build
       - run: go vet
       - run: go test -v
