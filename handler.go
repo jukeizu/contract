@@ -15,6 +15,8 @@ func MakeRequestHttpHandlerFunc(f func(Request) (*Response, error)) http.Handler
 			return
 		}
 
+		request.QueryParams = r.URL.Query()
+
 		response, err := f(request)
 		if err != nil {
 			writeError(w, r, err)
