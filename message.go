@@ -9,4 +9,5 @@ type Message struct {
 	Tts              bool        `json:"tts,omitempty" yaml:"tts,omitempty"`
 	IsPrivateMessage bool        `json:"isPrivateMessage,omitempty" yaml:"isPrivateMessage,omitempty"`
 	IsRedirect       bool        `json:"isRedirect,omitempty" yaml:"isRedirect,omitempty"`
+	EditMessageId    string      `json:"editMessageId,omitempty" yaml:"editMessageId,omitempty"`
 }

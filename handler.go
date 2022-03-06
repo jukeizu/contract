@@ -47,6 +47,26 @@ func MakeJobHttpHandlerFunc(f func(Job) (*Response, error)) http.HandlerFunc {
 	}
 }
 
+func MakeInteractionHttpHandlerFunc(f func(Interaction) (*Response, error)) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		interaction := Interaction{}
+
+		err := json.NewDecoder(r.Body).Decode(&interaction)
+		if err != nil {
+			writeError(w, r, err)
+			return
+		}
+
+		response, err := f(interaction)
+		if err != nil {
+			writeError(w, r, err)
+			return
+		}
+
+		writeResponse(w, r, response)
+	}
+}
+
 func writeResponse(w http.ResponseWriter, r *http.Request, response *Response) {
 	jsonResponse, err := json.Marshal(response)
 	if err != nil {
